@@ -179,7 +179,7 @@ min_age <- floor(min(ana$age, na.rm = TRUE))
 max_age <- ceiling(max(ana$age, na.rm = TRUE))
 breaks_age <- seq(min_age, max_age, by = 5)
 
-png("task5_age_hist_by_gender.png", width = 800, height = 400)
+png("task5_age_hist_by_gender.png", width = 800, height = 600)
 par(mfrow = c(1,2), mar = c(4,4,3,1))
 hist(ages_f, breaks = breaks_age, col = 'lightcoral', border = 'white',
   xlab = 'Age (years)', ylab = 'Frequency', main = 'Age Distribution - Women')
