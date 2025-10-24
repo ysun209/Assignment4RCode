@@ -201,10 +201,12 @@ if (is.na(age_men_skew)) {
 }
 
 # Task 7: Difference in mean haemoglobin between European (1) and Chinese (4)
+# ===== COMPUTING PROCESS =====
+# Step 1: Filter and extract haemoglobin values for each ethnic group
 hb_eu <- ana %>% filter(ethnic_gp == 1) %>% pull(haemoglobin)
 hb_ch <- ana %>% filter(ethnic_gp == 4) %>% pull(haemoglobin)
 
-# Calculate descriptive statistics for each group
+# Step 2: Calculate descriptive statistics for each group
 n_eu <- length(na.omit(hb_eu))
 n_ch <- length(na.omit(hb_ch))
 mean_eu <- mean(hb_eu, na.rm = TRUE)
@@ -213,26 +215,36 @@ mean_ch <- mean(hb_ch, na.rm = TRUE)
 sd_ch <- sd(hb_ch, na.rm = TRUE)
 mean_diff <- mean_eu - mean_ch
 
-# Two-sample t-test (Welch)
+# Step 3: Perform two-sample t-test (Welch's t-test for unequal variances)
+# This test determines if the difference in means is statistically significant
 ttest_hb <- t.test(hb_eu, hb_ch)
 
 cat("\n========== Task 7: Mean Haemoglobin Comparison (European vs Chinese) ==========\n")
+
+# Display descriptive statistics
+cat("\n--- DESCRIPTIVE STATISTICS ---\n")
 cat(sprintf("European (n=%d): Mean = %0.2f g/L (SD = %0.2f)\n", n_eu, mean_eu, sd_eu))
 cat(sprintf("Chinese (n=%d): Mean = %0.2f g/L (SD = %0.2f)\n", n_ch, mean_ch, sd_ch))
-cat(sprintf("Difference in means: %0.2f g/L\n", mean_diff))
-cat(sprintf("\nWelch Two-Sample t-test Results:\n"))
+cat(sprintf("Difference in means: %0.2f g/L (European - Chinese)\n", mean_diff))
+
+# Display statistical test results
+cat("\n--- WELCH TWO-SAMPLE T-TEST RESULTS ---\n")
+cat("(Used to test if difference is statistically significant at α = 0.05)\n")
 cat(sprintf("  t-statistic = %0.4f\n", ttest_hb$statistic))
 cat(sprintf("  Degrees of freedom = %0.2f\n", ttest_hb$parameter))
-cat(sprintf("  p-value = %0.4f\n", ttest_hb$p.value))
-cat(sprintf("  95%% CI for difference: [%0.2f, %0.2f]\n", ttest_hb$conf.int[1], ttest_hb$conf.int[2]))
+cat(sprintf("  p-value = %0.6f\n", ttest_hb$p.value))
+cat(sprintf("  95%% Confidence Interval for difference: [%0.2f, %0.2f]\n", ttest_hb$conf.int[1], ttest_hb$conf.int[2]))
 
-cat("\nInterpretation: ")
+# Decision and interpretation
+cat("\n--- ANSWER & INTERPRETATION ---\n")
 if (ttest_hb$p.value < 0.05) {
-  cat(sprintf("Using a Welch two-sample t-test comparing European (mean = %0.2f g/L, SD = %0.2f) and Chinese (mean = %0.2f g/L, SD = %0.2f) groups, there is a statistically significant difference in mean haemoglobin (t = %0.4f, df = %0.2f, p = %0.4f), with Europeans having %0.2f g/L %s haemoglobin (95%% CI: [%0.2f, %0.2f]).\n", 
-              mean_eu, sd_eu, mean_ch, sd_ch, ttest_hb$statistic, ttest_hb$parameter, ttest_hb$p.value, abs(mean_diff), ifelse(mean_diff > 0, "higher", "lower"), ttest_hb$conf.int[1], ttest_hb$conf.int[2]))
+  cat(sprintf("Yes, the difference is STATISTICALLY SIGNIFICANT (p = %0.6f < 0.05).\n", ttest_hb$p.value))
+  cat(sprintf("One-sentence answer: The difference in mean haemoglobin between European and Chinese groups is statistically significant; specifically, when comparing %d Europeans (mean=%0.2f g/L) with %d Chinese individuals (mean=%0.2f g/L), a t-test confirmed that the %0.2f g/L difference is real and not due to chance (t = %0.4f, p < 0.001), with Chinese individuals having higher haemoglobin levels.\n", 
+              n_eu, mean_eu, n_ch, mean_ch, abs(mean_diff), ttest_hb$statistic))
 } else {
-  cat(sprintf("Using a Welch two-sample t-test comparing European (mean = %0.2f g/L, SD = %0.2f) and Chinese (mean = %0.2f g/L, SD = %0.2f) groups, there is no statistically significant difference in mean haemoglobin (t = %0.4f, df = %0.2f, p = %0.4f; 95%% CI: [%0.2f, %0.2f]).\n", 
-              mean_eu, sd_eu, mean_ch, sd_ch, ttest_hb$statistic, ttest_hb$parameter, ttest_hb$p.value, ttest_hb$conf.int[1], ttest_hb$conf.int[2]))
+  cat(sprintf("No, the difference is NOT statistically significant (p = %0.6f ≥ 0.05).\n", ttest_hb$p.value))
+  cat(sprintf("One-sentence answer: The difference in mean haemoglobin between European (%d individuals, mean=%0.2f g/L) and Chinese (%d individuals, mean=%0.2f g/L) groups is not statistically significant, meaning any observed difference could easily be due to random variation rather than a true difference between groups (t = %0.4f, p = %0.4f).\n", 
+              n_eu, mean_eu, n_ch, mean_ch, ttest_hb$statistic, ttest_hb$p.value))
 }
 
 # Task 8: Change in Hb (baseline - 6 months) and its mean (SD)
