@@ -203,11 +203,37 @@ if (is.na(age_men_skew)) {
 # Task 7: Difference in mean haemoglobin between European (1) and Chinese (4)
 hb_eu <- ana %>% filter(ethnic_gp == 1) %>% pull(haemoglobin)
 hb_ch <- ana %>% filter(ethnic_gp == 4) %>% pull(haemoglobin)
+
+# Calculate descriptive statistics for each group
+n_eu <- length(na.omit(hb_eu))
+n_ch <- length(na.omit(hb_ch))
+mean_eu <- mean(hb_eu, na.rm = TRUE)
+sd_eu <- sd(hb_eu, na.rm = TRUE)
+mean_ch <- mean(hb_ch, na.rm = TRUE)
+sd_ch <- sd(hb_ch, na.rm = TRUE)
+mean_diff <- mean_eu - mean_ch
+
 # Two-sample t-test (Welch)
 ttest_hb <- t.test(hb_eu, hb_ch)
-cat(sprintf("\nTask 7: t-test comparing mean haemoglobin (European vs Chinese): p-value = %0.4f\n", ttest_hb$p.value))
-cat("Interpretation: ")
-if (ttest_hb$p.value < 0.05) cat("Difference is statistically significant at alpha=0.05.\n") else cat("No statistically significant difference at alpha=0.05.\n")
+
+cat("\n========== Task 7: Mean Haemoglobin Comparison (European vs Chinese) ==========\n")
+cat(sprintf("European (n=%d): Mean = %0.2f g/L (SD = %0.2f)\n", n_eu, mean_eu, sd_eu))
+cat(sprintf("Chinese (n=%d): Mean = %0.2f g/L (SD = %0.2f)\n", n_ch, mean_ch, sd_ch))
+cat(sprintf("Difference in means: %0.2f g/L\n", mean_diff))
+cat(sprintf("\nWelch Two-Sample t-test Results:\n"))
+cat(sprintf("  t-statistic = %0.4f\n", ttest_hb$statistic))
+cat(sprintf("  Degrees of freedom = %0.2f\n", ttest_hb$parameter))
+cat(sprintf("  p-value = %0.4f\n", ttest_hb$p.value))
+cat(sprintf("  95%% CI for difference: [%0.2f, %0.2f]\n", ttest_hb$conf.int[1], ttest_hb$conf.int[2]))
+
+cat("\nInterpretation: ")
+if (ttest_hb$p.value < 0.05) {
+  cat(sprintf("Using a Welch two-sample t-test comparing European (mean = %0.2f g/L, SD = %0.2f) and Chinese (mean = %0.2f g/L, SD = %0.2f) groups, there is a statistically significant difference in mean haemoglobin (t = %0.4f, df = %0.2f, p = %0.4f), with Europeans having %0.2f g/L %s haemoglobin (95%% CI: [%0.2f, %0.2f]).\n", 
+              mean_eu, sd_eu, mean_ch, sd_ch, ttest_hb$statistic, ttest_hb$parameter, ttest_hb$p.value, abs(mean_diff), ifelse(mean_diff > 0, "higher", "lower"), ttest_hb$conf.int[1], ttest_hb$conf.int[2]))
+} else {
+  cat(sprintf("Using a Welch two-sample t-test comparing European (mean = %0.2f g/L, SD = %0.2f) and Chinese (mean = %0.2f g/L, SD = %0.2f) groups, there is no statistically significant difference in mean haemoglobin (t = %0.4f, df = %0.2f, p = %0.4f; 95%% CI: [%0.2f, %0.2f]).\n", 
+              mean_eu, sd_eu, mean_ch, sd_ch, ttest_hb$statistic, ttest_hb$parameter, ttest_hb$p.value, ttest_hb$conf.int[1], ttest_hb$conf.int[2]))
+}
 
 # Task 8: Change in Hb (baseline - 6 months) and its mean (SD)
 mean_change_hb <- mean_sd(ana$change_haemoglobin)
