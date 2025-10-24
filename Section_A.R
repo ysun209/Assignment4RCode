@@ -182,9 +182,9 @@ breaks_age <- seq(min_age, max_age, by = 5)
 png("task5_age_hist_by_gender.png", width = 800, height = 400)
 par(mfrow = c(1,2), mar = c(4,4,3,1))
 hist(ages_f, breaks = breaks_age, col = 'lightcoral', border = 'white',
-  xlab = 'Age (years)', ylab = 'Frequency', main = 'Women')
+  xlab = 'Age (years)', ylab = 'Frequency', main = 'Age Distribution - Women')
 hist(ages_m, breaks = breaks_age, col = 'steelblue', border = 'white',
-  xlab = 'Age (years)', ylab = 'Frequency', main = 'Men')
+  xlab = 'Age (years)', ylab = 'Frequency', main = 'Age Distribution - Men')
 dev.off()
 cat("Saved histograms: task5_age_hist_by_gender.png\n")
 
