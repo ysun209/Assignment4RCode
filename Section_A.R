@@ -188,10 +188,17 @@ hist(ages_m, breaks = breaks_age, col = 'steelblue', border = 'white',
 dev.off()
 cat("Saved histograms: task5_age_hist_by_gender.png\n")
 
-# Task 6: Skewness for men's age
-age_men_skew <- e1071::skewness(ana$age[ana$gender == 'M'], na.rm = TRUE)
-skew_direction <- ifelse(age_men_skew > 0, 'right (positive skew)', ifelse(age_men_skew < 0, 'left (negative skew)', 'approximately symmetric'))
-cat(sprintf("Task 6: Men's age skewness = %0.3f -> %s\n", age_men_skew, skew_direction))
+# Task 6: Skewness for men's age (submission-ready answer)
+ages_m <- ana$age[ana$gender == 'M']
+age_men_skew <- e1071::skewness(ages_m, na.rm = TRUE)
+if (is.na(age_men_skew)) {
+  cat("Task 6 (answer): Could not compute men's age skewness (no non-missing male ages).\n")
+} else {
+  skew_direction <- ifelse(age_men_skew > 0, 'right (positive skew)', ifelse(age_men_skew < 0, 'left (negative skew)', 'approximately symmetric'))
+  skew_word <- if (age_men_skew > 0) 'right-skewed' else if (age_men_skew < 0) 'left-skewed' else 'approximately symmetric'
+  cat(sprintf("Task 6 (answer): Men's age skewness = %0.3f (%s). Conclusion: The distribution of men's ages is %s.\n", 
+              age_men_skew, skew_direction, skew_word))
+}
 
 # Task 7: Difference in mean haemoglobin between European (1) and Chinese (4)
 hb_eu <- ana %>% filter(ethnic_gp == 1) %>% pull(haemoglobin)
