@@ -258,9 +258,23 @@ which_higher <- ifelse(mean_change_women > mean_change_men, 'Women', ifelse(mean
 cat(sprintf("Task 9: Mean change in Hb - Women: %0.2f, Men: %0.2f. Higher for: %s\n", mean_change_women, mean_change_men, which_higher))
 
 # Task 10: % of women with decrease in Hb > 15 g/L (i.e., change_haemoglobin > 15)
+# ===== COMPUTING PROCESS =====
+# Step 1: Filter to get only women from the dataset
 women <- ana %>% filter(gender == 'F')
+n_women_total <- nrow(women)
+
+# Step 2: Count how many women have a decrease in Hb > 15 g/L
+women_with_decrease_gt15 <- sum(women$change_haemoglobin > 15, na.rm = TRUE)
+n_women_with_data <- sum(!is.na(women$change_haemoglobin))
+
+# Step 3: Calculate the percentage
 pct_women_decrease15 <- 100 * mean(women$change_haemoglobin > 15, na.rm = TRUE)
-cat(sprintf("\nTask 10: Percentage of women with decrease in Hb > 15 g/L = %0.1f%%\n", pct_women_decrease15))
+
+cat("\n========== Task 10: Women with Decrease in Haemoglobin > 15 g/L ==========\n")
+cat(sprintf("Total women in cohort: %d\n", n_women_total))
+cat(sprintf("Women with valid Hb change data: %d\n", n_women_with_data))
+cat(sprintf("Women with Hb decrease > 15 g/L: %d\n", women_with_decrease_gt15))
+cat(sprintf("Percentage of women with decrease in Hb > 15 g/L: %0.1f%%\n", pct_women_decrease15))
 
 # Task 11: Create anaemia variables at baseline and 6 months (Yes/No/Missing)
 classify_anaemia <- function(hb, gender) {
