@@ -165,7 +165,7 @@ pct_maori_women <- 100 * mean(maori$gender == "F", na.rm = TRUE)
 cat(sprintf("Task 3: Percentage of Māori who are women = %0.1f%%\n", pct_maori_women))
 
 # Task 4: Boxplot of age stratified by ethnic group
-png("task4_age_by_ethnic_group_boxplot.png", width = 7, height = 5, units = "in", res = 150)
+png("task4_age_by_ethnic_group_boxplot.png", width = 800, height = 600)
 boxplot(age ~ factor(ethnic_gp, labels = c('European','Pacific Peoples','Māori','Chinese')), data = ana,
   xlab = "Ethnic group", ylab = "Age (years)", main = "Age by ethnic group",  col = c("lightblue", "lightgreen", "lightcoral", "lightyellow"))
 dev.off()
