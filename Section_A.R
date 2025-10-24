@@ -171,14 +171,21 @@ boxplot(age ~ factor(ethnic_gp, labels = c('European','Pacific Peoples','Māori'
 dev.off()
 cat("Saved boxplot: task4_age_by_ethnic_group_boxplot.png\n")
 
-# Task 5: Histograms of age stratified by gender
-p_hist <- ggplot(ana %>% filter(gender %in% c('M','F')), aes(x = age)) +
-  geom_histogram(binwidth = 5, fill = 'steelblue', color = 'white') +
-  facet_wrap(~gender, nrow = 1, labeller = as_labeller(c('F'='Women','M'='Men'))) +
-  labs(x = "Age (years)", y = "Count", title = "Age distribution by gender") +
-  theme_minimal()
+# Task 5: Histograms of age stratified by gender (base R hist)
+# Prepare age vectors for each gender and define common breaks (5-year bins)
+ages_f <- na.omit(ana$age[ana$gender == 'F'])
+ages_m <- na.omit(ana$age[ana$gender == 'M'])
+min_age <- floor(min(ana$age, na.rm = TRUE))
+max_age <- ceiling(max(ana$age, na.rm = TRUE))
+breaks_age <- seq(min_age, max_age, by = 5)
 
-ggsave("task5_age_hist_by_gender.png", p_hist, width = 8, height = 4, dpi = 150)
+png("task5_age_hist_by_gender.png", width = 800, height = 400)
+par(mfrow = c(1,2), mar = c(4,4,3,1))
+hist(ages_f, breaks = breaks_age, col = 'steelblue', border = 'white',
+  xlab = 'Age (years)', ylab = 'Count', main = 'Women')
+hist(ages_m, breaks = breaks_age, col = 'steelblue', border = 'white',
+  xlab = 'Age (years)', ylab = 'Count', main = 'Men')
+dev.off()
 cat("Saved histograms: task5_age_hist_by_gender.png\n")
 
 # Task 6: Skewness for men's age
