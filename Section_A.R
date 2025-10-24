@@ -167,7 +167,7 @@ cat(sprintf("Task 3: Percentage of Māori who are women = %0.1f%%\n", pct_maori_
 # Task 4: Boxplot of age stratified by ethnic group
 png("task4_age_by_ethnic_group_boxplot.png", width = 800, height = 600)
 boxplot(age ~ factor(ethnic_gp, labels = c('European','Pacific Peoples','Māori','Chinese')), data = ana,
-  xlab = "Ethnic group", ylab = "Age (years)", main = "Age by ethnic group",  col = c("lightblue", "lightgreen", "lightcoral", "lightyellow"))
+  xlab = "Ethnic group", ylab = "Age (years)", main = "Age by ethnic group",  col = c("lightblue", "lightgreen", "lightcoral", "lightgoldenrod"))
 dev.off()
 cat("Saved boxplot: task4_age_by_ethnic_group_boxplot.png\n")
 
@@ -181,10 +181,10 @@ breaks_age <- seq(min_age, max_age, by = 5)
 
 png("task5_age_hist_by_gender.png", width = 800, height = 400)
 par(mfrow = c(1,2), mar = c(4,4,3,1))
-hist(ages_f, breaks = breaks_age, col = 'steelblue', border = 'white',
-  xlab = 'Age (years)', ylab = 'Count', main = 'Women')
+hist(ages_f, breaks = breaks_age, col = 'lightcoral', border = 'white',
+  xlab = 'Age (years)', ylab = 'Frequency', main = 'Women')
 hist(ages_m, breaks = breaks_age, col = 'steelblue', border = 'white',
-  xlab = 'Age (years)', ylab = 'Count', main = 'Men')
+  xlab = 'Age (years)', ylab = 'Frequency', main = 'Men')
 dev.off()
 cat("Saved histograms: task5_age_hist_by_gender.png\n")
 
