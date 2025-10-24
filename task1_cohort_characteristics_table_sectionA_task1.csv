@@ -1,0 +1,22 @@
+Item,Total,Women,Men
+n,882,287,595
+"Age, years (mean (SD))",68.7 (14.1),71.8 (14.5),67.3 (13.8)
+Ethnic: European,624 (70.7%),,
+Ethnic: Pacific Peoples,18 (2%),,
+Ethnic: Māori,81 (9.2%),,
+Ethnic: Chinese,159 (18%),,
+"
+_At baseline_",,,
+"Heart rate, bpm (mean (SD))",72.8 (16.0),73.7 (14.6),72.3 (16.6)
+"Systolic blood pressure, mmHg (mean (SD))",121.3 (21.6),123.7 (23.2),120.1 (20.7)
+"Haemoglobin, g/L (mean (SD))",134.2 (20.9),129.7 (18.8),136.4 (21.5)
+"
+_At 6 months post-baseline_",,,
+"Heart rate, bpm (mean (SD))",71.5 (14.1),72.4 (13.0),71.1 (14.6)
+"Systolic blood pressure, mmHg (mean (SD))",120.8 (22.9),123.6 (23.0),119.5 (22.7)
+"Haemoglobin, g/L (mean (SD))",131.4 (19.1),126.7 (17.5),133.5 (19.5)
+"
+_Change in values over 6 months_",,,
+"Change Heart rate, bpm (mean (SD))",0.6 (16.9),0.6 (16.8),0.6 (17.0)
+"Change Systolic blood pressure, mmHg (mean (SD))",0.7 (20.7),0.8 (22.4),0.7 (19.8)
+"Change Haemoglobin, g/L (mean (SD))",3.0 (16.1),2.9 (16.4),3.0 (15.9)

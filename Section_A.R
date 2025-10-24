@@ -165,13 +165,11 @@ pct_maori_women <- 100 * mean(maori$gender == "F", na.rm = TRUE)
 cat(sprintf("Task 3: Percentage of Māori who are women = %0.1f%%\n", pct_maori_women))
 
 # Task 4: Boxplot of age stratified by ethnic group
-p_box <- ggplot(ana, aes(x = factor(ethnic_gp, labels = c('European','Pacific Peoples','Māori','Chinese')), y = age)) +
-  geom_boxplot() +
-  labs(x = "Ethnic group", y = "Age (years)", title = "Age by ethnic group") +
-  theme_minimal()
-
-ggsave("age_by_ethnic_group_boxplot.png", p_box, width = 7, height = 5, dpi = 150)
-cat("Saved boxplot: age_by_ethnic_group_boxplot.png\n")
+png("task4_age_by_ethnic_group_boxplot.png", width = 7, height = 5, units = "in", res = 150)
+boxplot(age ~ factor(ethnic_gp, labels = c('European','Pacific Peoples','Māori','Chinese')), data = ana,
+  xlab = "Ethnic group", ylab = "Age (years)", main = "Age by ethnic group",  col = c("lightblue", "lightgreen", "lightcoral", "lightyellow"))
+dev.off()
+cat("Saved boxplot: task4_age_by_ethnic_group_boxplot.png\n")
 
 # Task 5: Histograms of age stratified by gender
 p_hist <- ggplot(ana %>% filter(gender %in% c('M','F')), aes(x = age)) +
@@ -180,8 +178,8 @@ p_hist <- ggplot(ana %>% filter(gender %in% c('M','F')), aes(x = age)) +
   labs(x = "Age (years)", y = "Count", title = "Age distribution by gender") +
   theme_minimal()
 
-ggsave("age_hist_by_gender.png", p_hist, width = 8, height = 4, dpi = 150)
-cat("Saved histograms: age_hist_by_gender.png\n")
+ggsave("task5_age_hist_by_gender.png", p_hist, width = 8, height = 4, dpi = 150)
+cat("Saved histograms: task5_age_hist_by_gender.png\n")
 
 # Task 6: Skewness for men's age
 age_men_skew <- e1071::skewness(ana$age[ana$gender == 'M'], na.rm = TRUE)
@@ -274,12 +272,12 @@ if (prev_6m > prev_baseline) {
 }
 
 # Save the cohort table as CSV for inclusion in a report
-write_csv(cohort_table, "cohort_characteristics_table_sectionA_task1.csv")
-cat("Saved cohort characteristics table to cohort_characteristics_table_sectionA_task1.csv\n")
+write_csv(cohort_table, "task1_cohort_characteristics_table_sectionA_task1.csv")
+cat("Saved cohort characteristics table to task1_cohort_characteristics_table_sectionA_task1.csv\n")
 
 # Save the gender vs anaemia table
-write_csv(as.data.frame(tab_gender_anaemia), "gender_vs_anaemia_baseline_table.csv")
-cat("Saved gender vs anaemia table to gender_vs_anaemia_baseline_table.csv\n")
+write_csv(as.data.frame(tab_gender_anaemia), "task11_gender_vs_anaemia_baseline_table.csv")
+cat("Saved gender vs anaemia table to task11_gender_vs_anaemia_baseline_table.csv\n")
 
 # End of script
 cat("\nSection A Task 1 script complete.\n")
