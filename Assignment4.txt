@@ -56,6 +56,8 @@ Load the dataset Anaemia. The variables in the dataset are:
 
 **Task 1 (7 marks):** Complete the following table to summarise the key characteristics of the cohort.  Add any extra rows needed to complete the information for the listed variables. Values should be mean (SD) **or** median (IQR) **or** n(%) as appropriate to describe the distribution or prevalence of characteristics in the total cohort and stratified by sex
 
+I would choose to use SD.
+
 Cohort characteristics
   | Total | Women | Men |
 | --- | --- | --- | --- |
