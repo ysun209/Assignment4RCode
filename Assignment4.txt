@@ -1,0 +1,306 @@
+# Assignment 4: Practical assignment
+
+-   Due 29 Oct by 8:00
+-   Points 62
+-   Submitting a file upload
+-   Available 13 Aug at 8:00 - 29 Oct at 8:00
+
+**Word/time limit:** N/A
+
+**Weighting:** 30%
+
+**Individual/team:** Individual
+
+**Opens:** 8am NZT Thursday 14 August (Week 4)
+
+**Due date:** Complete this assignment by 8am NZT Wednesday 29 October (Week 13)
+
+After you have read this information, go to the [Assignment 4 Q&A](https://canvas.auckland.ac.nz/courses/119357/discussion_topics/1498876?wrap=1 "Assignment 4 Q&A") discussion board to ask any questions and see what your peers are saying about this assignment.
+
+## Assignment overview
+
+In this assignment, you will provide a record of practical work done with analysis software. There are three sections, each with their own individual tasks. Ensure you work through all sections. 
+
+This assignment supports [course learning outcomes 1, 2, 3 and 4](# "course learning outcomes 1, 2, 3 and 4"). 
+
+## Assignment details
+
+Load iNZight Lite and if required, refer to information about the software at [iNZight Lite](http://lite.docker.stat.auckland.ac.nz/) (iNZight, 2023). You may use R, SAS, Stata or Python for this assignment if you prefer. Please write which software you are using at the start of the assignment. 
+
+You must complete all three sections and **submit one PDF** containing your answers, calculations, tables and plots separated for each section (Sections A, B and C).
+
+**Select** the three headings to explore each section.
+
+### Section A
+
+In 2024, a group of endocrinologists thought more people in their clinics were developing anaemia than they were used to seeing. They were suspicious that it could be related to a medication that many of their patients were taking. They recruited 882 adults (aged 18 and older) who were taking that medication, assessed their heart rate, blood pressure and haemoglobin at baseline and again 6 months later.  You have been provided with an extract of the data they collected.
+
+For women, anaemia is defined as a haemoglobin < 115 g/L; for men, it is defined as a haemoglobin < 130 g/L.
+
+#### Tasks
+
+Load the dataset Anaemia. The variables in the dataset are:
+
+-   pt\_id: patient ID
+-   age: age in years
+-   gender: M = Male, F = Female
+-   ethnic\_gp: 1 = European, 2 = Pacific Peoples, 3 = Māori, 4 = Chinese
+-   heart\_rate: at baseline, in beats per minute (bpm)
+-   sbp: systolic blood pressure at baseline, in mmHg
+-   dbp: diastolic blood pressure at baseline, in mmHg
+-   haemoglobin: haemoglobin at baseline, in g/L
+-   heart\_rate\_6m: at 6 months, in beats per minute (bpm)sbp: systolic blood pressure at baseline, in mmHg
+-   sbp\_6m: systolic blood pressure at 6 months, in mmHg
+-   dbp\_6m: diastolic blood pressure at 6 months, in mmHg
+-   haemoglobin\_6m: haemoglobin at 6 months, in g/L
+
+**Task 1 (7 marks):** Complete the following table to summarise the key characteristics of the cohort.  Add any extra rows needed to complete the information for the listed variables. Values should be mean (SD) **or** median (IQR) **or** n(%) as appropriate to describe the distribution or prevalence of characteristics in the total cohort and stratified by sex
+
+Cohort characteristics
+  | Total | Women | Men |
+| --- | --- | --- | --- |
+ n |  |  |  |
+ Age, years |  |  |  |
+ Ethnic group |  |  |  |
+  |  |  |  |
+ _At baseline_ |  |  |  |
+ Heart rate, bpm |  |  |  |
+ Systolic blood pressure, mmHg |  |  |  |
+ Haemoglobin, g/L |  |  |  |
+  |  |  |  |
+ _At 6 months post-baseline_ |  |  |  |
+ Heart rate, bpm |  |  |  |
+ Systolic blood pressure, mmHg |  |  |  |
+ Haemoglobin, g/L |  |  |  |
+  |  |  |  |
+ _Change in values over 6 months_ |  |  |  |
+ Heart rate, bpm |  |  |  |
+ Systolic blood pressure, mmHg |  |  |  |
+ Haemoglobin, g/L |  |  |  |
+
+**Task 2 (1 mark):** What percentage of the cohort are Māori? 
+
+**Task 3 (1 mark):** What percentage of Māori are women? 
+
+**Task 4 (2 marks):** Using a boxplot, show the distributions of age stratified by ethnic group, ie. show the distribution of age for each ethnic group. 
+
+**Task 5 (2 marks)**: Using histograms, plot the distribution of age stratified by gender.
+
+**Task 6 (1 mark)**: Is the distribution of age for men skewed to the right or skewed to the left? 
+
+**Task 7 (2 marks)**: IIs the difference in mean haemoglobin at baseline between European and Chinese people statistically significant? Explain your answer in one sentence. 
+
+**Task 8 (1 mark)**: Calculate the change in Hb from baseline to 6 months as the value at baseline minus the value at 6 months.  What is the mean (SD) of the change in Hb? 
+
+**Task 9 (1 mark)**: Was the mean change in Hb higher for women or for men?  You do not need to assess if it is statistically significant.
+
+**Task 10 (3 marks)**: What percentage of women who started the study were shown to have a decrease in Hb over that time of  > 15 g/L ? 
+
+**Task 11 (4 marks)**:  Create 2 variables representing anaemia at baseline and at 6 months, with values of Yes, No or Missing.  Tabulate gender against anaemia and paste the table your software creates into the assignment. 
+
+**Task 12 (1 mark)**: What is the median and interquartile interval of age at baseline for people with anaemia? 
+
+**Task 13 (1 mark)**: Among the people with anaemia, is the median age higher for women or men? 
+
+**Task 14 (1 mark)**: What percentage of people who had anaemia at baseline did not still have anaemia at 6 months? 
+
+**Task 15 (1 mark)**: What percentage of people who did not have anaemia at baseline had developed anaemia 6 months later? 
+
+**Task 16 (1 mark)**: Without doing further statistical tests, write one sentence to say whether you think there has been an increase in anaemia in this group of patients. 
+
+
+
+
+
+
+
+### Section B
+
+Child Health and Development Studies done in 1961 and 1962 were the basis of research presented by Nolan and Speed to address the question of whether there is a link between maternal smoking and their baby’s health.
+
+The following variables have been retained from this publicly available dataset. It has data on 1236 children.
+
+-   id: identification number
+-   gestation:  length of gestation, in days
+-   sex:  infant's sex, where 1=male, 2=female
+-   wt: baby’s birth weight, in ounces (oz)
+-   race:  mother's race, where 0-5=white, 6=mexican,7=black, 8=Asian, 9=mixed
+-   age:  mother's age, in years
+-   ht: mother's height, in inches
+-   wt.1: mother's pre-pregnancy weight, in pounds (lbs)
+-   drace: father's race (a factor with levels equivalent to mother's race)
+-   dage: father's age, in years
+-   dht: father's height, in inches
+-   dwt: father's weight, in pounds (lbs)
+-   smoke: does the mother smoke cigarettes? 0=never, 1=smokes now, 2=until current pregnancy, 3=once did, not now
+-   time:  time since quitting smoking: 0=never smoked, 1=still smokes, 2=during current preg, 3=within 1 yr, 4=1 to 2 years ago, 5= 2 to 3 yr ago, 6= 3 to 4 yrs ago, 7=5 to 9yrs ago, 8=10+yrs ago, 9=quit or don't know
+-   number: number of cigs smoked per day for past and current smokers 0=never, 1=1-4, 2=5-9, 3=10-14, 4=15-19, 5=20-29, 6=30-39, 7=40-60, 8=60+, 9=smoke but don't know
+
+#### Tasks
+
+Load the dataset Gestation. 
+
+**Task 17 (2 marks):** Plot baby’s birth weight against mother’s pre-pregnancy weight, ensuring the graph is labelled correctly. Paste this plot into your assignment.
+
+**Task 18 (1 mark):** Paste another version of this plot after changing the symbol being plotted (to a symbol of your choosing) and adding a red linear trend line. 
+
+**Task 19 (2 marks)**: Describe the strength of association between baby’s birth weight against mother’s pre-pregnancy weight. Include the name of the test used to obtain this. 
+
+**Task 20 (2 marks)**: Some babies weren’t included in the analysis of the strength of association.  How many weren’t included and why were they not in it?  
+
+**Task 21 (3 marks)**: Filter the data to only include people with gestation < 270 days.
+
+  A. What percentage of the cohort are left in the data? 
+
+  B. What is the median and interquartile range of the gestation in this subset of people? 
+
+  C. Report to 1 decimal place the mean and standard deviation of mother’s age in this subset of people.
+
+
+
+
+
+
+
+
+
+### Section C
+
+This section is based on modified data from a randomised controlled trial about primary biliary cirrhosis of the liver conducted by the Mayo Clinic between 1974 and 1984. The trial randomised people with primary biliary cirrhosis (PBC) to receive either a drug (D-penicillamine) or a placebo.  In addition, the cohort includes 97 people who were not randomised but had measurements at baseline and were followed for the endpoint. The status of everyone in the cohort at the end of follow-up was therefore recorded as either transplant, dead, or censored.
+
+Variables in the dataset are as follows:
+
+-   age: In years
+-   albumin: Serum albumin (g/dl)
+-   alk.phos: Alkaline phosphatase (U/liter)
+-   ascites: Presence of ascites
+-   ast: Aspartate aminotransferase, once called SGOT (U/ml)
+-   bili: Serum bilirubin (mg/dl)
+-   chol: Serum cholesterol (mg/dl)
+-   copper: Urine copper (ug/day)
+-   edema: 0 no edema, 0.5 untreated or successfully treated 1 edema despite diuretic therapy
+-   hepato: Presence of hepatomegaly or enlarged liver
+-   id: Case number
+-   platelet: Platelet count
+-   protime: Standardised blood clotting time
+-   sex: M/f
+-   spiders: Blood vessel malformations in the skin
+-   stage: Histologic stage of disease (needs biopsy)
+-   status: Status at endpoint, 0/1/2 for censored, transplant, dead
+-   time: Number of days between registration and the earlier of death, transplantation, or study analysis in July, 1986
+-   trt: Treatment group, 1/2/NA for D-penicillmine, placebo, not randomised
+-   trig: Triglycerides (mg/dl).
+
+#### Tasks
+
+Load the dataset called pbc.csv (CSV 31 KB). 
+
+**Task 22 (3 marks)**: Convert albumin to a categorical variable of two groups: Group A = up to and including the median, Group B = above the median. What is the median albumin for each of the two groups, to 2 decimal places?
+
+**Task 23 (6 marks):** Convert treatment group and endpoint status to categorical variables and compare in a table.  Transfer the output of the software into a table that could be included in a report or manuscript that will be submitted to a journal for publication and paste this in your assignment. Now answer the following questions:
+
+1.  How many people in the cohort had a transplant?
+2.  What percentage of those who had a transplant were in the placebo group?
+3.  What percentage of the D-pencillamine group died?
+
+**Task 24 (5 marks):** Merge the endpoint status of transplantation and died into one group, creating a new variable called 'outcome.binary', where 0 = censored and 1 = transplant or died. Calculate and briefly discuss the risk of having a transplant or dying in the D-pencillamine group compared to the placebo group.
+
+**Task 25 (6 marks):** Convert ‘stage’ to a categorical variable. Now answer the following questions:
+
+1.  Which stage has the most people in it?
+2.  What is the mean (SD) of bilirubin in each of the 4 stages?
+3.  To assess mean age of people in each stage, select Inference and Hypothesis testing using ANOVA.  The output includes an F-test and corresponding p-value. Interpret the p-value.
+4.  One of the results in the output in iNZight shows the difference in mean age of people in stage 3 with those in stage 4. Interpret the findings of that analysis.  
+    If you are not using iNZight software, assess the paired differences in means, paste the output you get, and report the findings of the difference in mean age of people in stage 3 with those in stage 4.
+
+
+
+
+
+
+
+
+
+### Supporting resources
+
+-   This assignment draws on the content presented in Modules 1–11. 
+-   Refer to your [Assignment briefcase](https://canvas.auckland.ac.nz/courses/119357/pages/assignment-briefcase "Assignment briefcase") for general support on researching, writing and referencing academic assignments.
+-   Use the [Quickcite](https://www.cite.auckland.ac.nz/2.html) (University of Auckland, n.d.) tool for assistance with referencing.
+
+**Select** the three headings to view information about assignment criteria, academic integrity, and how to submit your assignment.
+
+##### Assignment criteria
+
+The points allocated to each task are noted next to each question and are dependent on the complexity and amount of work required to complete each task.
+
+##### Assessment declaration
+
+#### Auckland Online – Assessment Declaration and Statement of Authorship
+
+**Before submitting your assignment please ensure you have completed and understood the University of Auckland** **[Academic Integrity Course](https://www.auckland.ac.nz/en/students/forms-policies-and-guidelines/student-policies-and-guidelines/academic-integrity-copyright/academic-integrity-course.html)****.**
+
+By submitting my assignment, I declare that:
+
+-   I have read and understood the University’s [**Student Academic Conduct Statute**](https://www.auckland.ac.nz/en/students/forms-policies-and-guidelines/student-policies-and-guidelines/academic-integrity-copyright/university-regulations-statutes-guidelines.html), as well as the University regulations, statutes and guidelines on [**Academic Integrity**](https://www.auckland.ac.nz/en/students/forms-policies-and-guidelines/student-policies-and-guidelines/academic-integrity-copyright.html).
+-   What I am submitting is an original piece of work and no part has been completed by a person or persons other than myself.
+-   No part of this work has been copied or paraphrased from any other source except where this has been clearly and correctly acknowledged in the body of the assignment and included in the reference list.
+-   I have retained a copy of this assignment in the event of it becoming lost or damaged.
+
+I agree and acknowledge that:
+
+-   I have read and understood the declaration and statement of authorship above.
+-   I accept that use of my University of Auckland account to electronically submit this assignment constitutes my agreement to the Auckland Online Assessment Declaration and Statement of Authorship.
+-   If I do not agree to the Auckland Online Assessment Declaration in this context, the assignment will not be valid for assessment purposes and will not be included in the aggregate score for this course.
+-   I am aware that it is not acceptable to resubmit the same piece of work (in part or as whole) for multiple assessments without permission from the Course Coordinator.
+
+Further information relating to the penalties for plagiarism, which range from a formal instance of academic misconduct through to cancellation of a student’s enrolment at the University, is contained in the University of Auckland [Statute for Student Discipline (2013)](https://www.auckland.ac.nz/en/students/forms-policies-and-guidelines/student-policies-and-guidelines/academic-integrity-copyright/university-regulations-statutes-guidelines.html).
+
+##### Submission details overview
+
+This assignment will be submitted through Canvas. When you are ready to submit your assignment, select the 'Start Assignment' button on this page and scroll down to the 'File Upload' tab where you can choose your file.
+
+If your assignment has multiple files, select 'Add Another File' for each subsequent file **before** ticking the 'Agree' check box, then select 'Submit Assignment'.
+
+**Please note:** When you submit your assignment through Canvas, you are also submitting the assignment through Turnitin. Turnitin is a text-matching service that compares your work with an international database of information sources. You will need to agree to using it.
+
+## Rubric
+
+Title:
+
+Assignment 4 rubric
+Criteria	Ratings	Pts
+Section A - task 1
+10 pts
+Section A - task 2
+2 pts
+Section A - task 3
+8 pts
+Section A - task 4a
+2.5 pts
+Section A - task 4b
+1.5 pts
+Section A - task 4c plot
+1.5 pts
+Section A - task 4c questions
+3.5 pts
+Section B - task 5
+2.5 pts
+Section B - task 6
+1.5 pts
+Section B - task 7
+3 pts
+Section C - task 8
+4 pts
+Section C - task 9 table
+6 pts
+Section C - task 9 questions
+4 pts
+Section C - task 10a+b
+3 pts
+Section C - task 10c+d
+2 pts
+Section C - task 11a+b+c+d
+4 pts
+Section C - task 11e
+3 pts
+Total points: 62
