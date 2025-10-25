@@ -316,9 +316,28 @@ higher_median_gender <- med_age_by_gender_anaemic$gender[which.max(med_age_by_ge
 cat(sprintf("Among people with anaemia, median age is higher for: %s\n", higher_median_gender))
 
 # Task 14: % of people with anaemia at baseline who did not still have anaemia at 6 months
+# ===== COMPUTING PROCESS =====
+# Step 1: Filter to get only people with anaemia at baseline
 ana_baseline_yes <- ana %>% filter(anaemia_baseline == 'Yes')
-pct_recovered <- 100 * mean(ana_baseline_yes$anaemia_6m != 'Yes', na.rm = TRUE)
-cat(sprintf("\nTask 14: %% of baseline-anaemic who no longer had anaemia at 6 months = %0.1f%%\n", pct_recovered))
+n_baseline_anaemic <- nrow(ana_baseline_yes)
+
+# Step 2: Count how many had data at 6 months and whether they still had anaemia
+n_with_6m_data <- sum(!is.na(ana_baseline_yes$anaemia_6m))
+n_still_anaemic_6m <- sum(ana_baseline_yes$anaemia_6m == 'Yes', na.rm = TRUE)
+n_no_longer_anaemic <- sum(ana_baseline_yes$anaemia_6m == 'No', na.rm = TRUE)
+n_missing_6m <- sum(is.na(ana_baseline_yes$anaemia_6m))
+
+# Step 3: Calculate percentage of those who no longer have anaemia (among those with valid 6m data)
+pct_recovered <- 100 * mean(ana_baseline_yes$anaemia_6m == 'No', na.rm = TRUE)
+
+cat("\n========== Task 14: Baseline Anaemic - Recovery Status at 6 Months ==========\n")
+cat(sprintf("People with anaemia at baseline: %d\n", n_baseline_anaemic))
+cat(sprintf("  - With valid 6-month data: %d\n", n_with_6m_data))
+cat(sprintf("  - Missing 6-month data: %d\n", n_missing_6m))
+cat(sprintf("Among those with 6-month data:\n"))
+cat(sprintf("  - Still anaemic at 6 months: %d\n", n_still_anaemic_6m))
+cat(sprintf("  - No longer anaemic at 6 months: %d\n", n_no_longer_anaemic))
+cat(sprintf("Percentage of baseline-anaemic who no longer had anaemia at 6 months: %0.1f%%\n", pct_recovered))
 
 # Task 15: % of people who did not have anaemia at baseline who developed anaemia at 6 months
 ana_baseline_no <- ana %>% filter(anaemia_baseline == 'No')
