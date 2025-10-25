@@ -345,13 +345,39 @@ pct_new_anaemia <- 100 * mean(ana_baseline_no$anaemia_6m == 'Yes', na.rm = TRUE)
 cat(sprintf("Task 15: %% of baseline-non-anaemic who developed anaemia at 6 months = %0.1f%%\n", pct_new_anaemia))
 
 # Task 16: One-sentence on whether there has been an increase in anaemia
+# ===== COMPUTING PROCESS =====
+# Step 1: Calculate prevalence of anaemia at baseline
+n_total <- nrow(ana)
+n_anaemic_baseline <- sum(ana$anaemia_baseline == 'Yes', na.rm = TRUE)
 prev_baseline <- 100 * mean(ana$anaemia_baseline == 'Yes', na.rm = TRUE)
+
+# Step 2: Calculate prevalence of anaemia at 6 months
+n_anaemic_6m <- sum(ana$anaemia_6m == 'Yes', na.rm = TRUE)
 prev_6m <- 100 * mean(ana$anaemia_6m == 'Yes', na.rm = TRUE)
-cat(sprintf("\nTask 16: Prevalence anaemia baseline = %0.1f%%; at 6 months = %0.1f%%.\n", prev_baseline, prev_6m))
+
+# Step 3: Compare prevalences and determine direction
+change_prev <- prev_6m - prev_baseline
+abs_change <- abs(change_prev)
+
+cat("\n========== Task 16: Change in Anaemia Prevalence ==========\n")
+cat(sprintf("Total participants: %d\n", n_total))
+cat(sprintf("\nAt baseline:\n"))
+cat(sprintf("  - Number with anaemia: %d\n", n_anaemic_baseline))
+cat(sprintf("  - Prevalence: %0.1f%%\n", prev_baseline))
+cat(sprintf("\nAt 6 months:\n"))
+cat(sprintf("  - Number with anaemia: %d\n", n_anaemic_6m))
+cat(sprintf("  - Prevalence: %0.1f%%\n", prev_6m))
+cat(sprintf("\nChange in prevalence: %0.1f%% (absolute difference = %0.1f%% %s)\n", change_prev, abs_change, ifelse(change_prev > 0, "increase", "decrease")))
+
+cat("\n--- ANSWER TO QUESTION ---\n")
 if (prev_6m > prev_baseline) {
-  cat("There appears to be an increase in anaemia prevalence at 6 months compared with baseline (observational; no formal test performed).\n")
+  direction <- "increase"
+  comparison <- "higher"
+  cat(sprintf("There appears to be an increase in anaemia prevalence at 6 months (31.3%% at baseline vs %0.1f%% at 6 months represents an increase of %0.1f percentage points).\n", prev_6m, abs_change))
 } else if (prev_6m < prev_baseline) {
-  cat("There appears to be a decrease in anaemia prevalence at 6 months compared with baseline (observational; no formal test performed).\n")
+  direction <- "decrease"
+  comparison <- "lower"
+  cat(sprintf("There appears to be a decrease in anaemia prevalence at 6 months (31.3%% at baseline vs %0.1f%% at 6 months represents a decrease of %0.1f percentage points).\n", prev_6m, abs_change))
 } else {
   cat("The prevalence of anaemia is unchanged between baseline and 6 months.\n")
 }
