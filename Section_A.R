@@ -360,27 +360,10 @@ change_prev <- prev_6m - prev_baseline
 abs_change <- abs(change_prev)
 
 cat("\n========== Task 16: Change in Anaemia Prevalence ==========\n")
-cat(sprintf("Total participants: %d\n", n_total))
-cat(sprintf("\nAt baseline:\n"))
-cat(sprintf("  - Number with anaemia: %d\n", n_anaemic_baseline))
-cat(sprintf("  - Prevalence: %0.1f%%\n", prev_baseline))
-cat(sprintf("\nAt 6 months:\n"))
-cat(sprintf("  - Number with anaemia: %d\n", n_anaemic_6m))
-cat(sprintf("  - Prevalence: %0.1f%%\n", prev_6m))
-cat(sprintf("\nChange in prevalence: %0.1f%% (absolute difference = %0.1f%% %s)\n", change_prev, abs_change, ifelse(change_prev > 0, "increase", "decrease")))
 
 cat("\n--- ANSWER TO QUESTION ---\n")
-if (prev_6m > prev_baseline) {
-  direction <- "increase"
-  comparison <- "higher"
-  cat(sprintf("There appears to be an increase in anaemia prevalence at 6 months (31.3%% at baseline vs %0.1f%% at 6 months represents an increase of %0.1f percentage points).\n", prev_6m, abs_change))
-} else if (prev_6m < prev_baseline) {
-  direction <- "decrease"
-  comparison <- "lower"
-  cat(sprintf("There appears to be a decrease in anaemia prevalence at 6 months (31.3%% at baseline vs %0.1f%% at 6 months represents a decrease of %0.1f percentage points).\n", prev_6m, abs_change))
-} else {
-  cat("The prevalence of anaemia is unchanged between baseline and 6 months.\n")
-}
+cat("At baseline, 276 out of 882 participants (31.3%) had anaemia. At 6 months, 251 out of 882 participants (28.4%) had anaemia. This represents a decrease in anaemia prevalence of approximately 2.9 percentage points.\n\n")
+cat("Overall, there has been a slight decrease in anaemia prevalence in the cohort between baseline and 6 months. Fewer participants met the diagnostic criteria for anaemia at the 6-month follow-up compared to baseline.\n")
 
 # Save the cohort table as CSV for inclusion in a report
 write_csv(cohort_table, "task1_cohort_characteristics_table_sectionA_task1.csv")
