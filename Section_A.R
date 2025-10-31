@@ -175,8 +175,9 @@ cat("Saved boxplot: task4_age_by_ethnic_group_boxplot.png\n")
 # Prepare age vectors for each gender and define common breaks (5-year bins)
 ages_f <- na.omit(ana$age[ana$gender == 'F'])
 ages_m <- na.omit(ana$age[ana$gender == 'M'])
-min_age <- floor(min(ana$age, na.rm = TRUE))
-max_age <- ceiling(max(ana$age, na.rm = TRUE))
+# Round to nearest multiple of 5 for clean bin boundaries
+min_age <- floor(min(ana$age, na.rm = TRUE) / 5) * 5
+max_age <- ceiling(max(ana$age, na.rm = TRUE) / 5) * 5
 breaks_age <- seq(min_age, max_age, by = 5)
 
 png("task5_age_hist_by_gender.png", width = 800, height = 600)
